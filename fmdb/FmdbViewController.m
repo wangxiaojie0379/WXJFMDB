@@ -7,7 +7,7 @@
 //
 
 #import "FmdbViewController.h"
-
+#import <AFHTTPSessionManager.h>
 @interface FmdbViewController ()
 
 @end
@@ -17,8 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    AFHTTPSessionManager *mananger = [AFHTTPSessionManager manager];
+    [mananger GET:@"" parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

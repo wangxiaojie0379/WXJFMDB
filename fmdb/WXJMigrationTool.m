@@ -48,7 +48,31 @@
 
 
 
-
+/*
+ 
+ 
+ - (void)readOldTableDataAddNewTableData{
+ NSMutableArray *dataArray = [self achieveAllDataContent:_tableName];
+ NSLog(@"%@", dataArray);
+ [_db beginTransaction];
+ BOOL isRollBack = NO;
+ @try {
+ for (NSDictionary *dict in dataArray) {
+ [self insertOldDataToNewTable:dict[@"dataDict"] idStr:dict[@"idStr"]];
+ }
+ }
+ @catch (NSException *exception) {
+ isRollBack = YES;
+ [_db rollback];
+ }
+ @finally {
+ if (!isRollBack) {
+ [_db commit];
+ }
+ }
+ }
+ 
+ */
 
 
 

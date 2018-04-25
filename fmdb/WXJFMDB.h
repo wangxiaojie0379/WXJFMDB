@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 //#define SQL_TEXT     @"TEXT" //文本
 //#define SQL_INTEGER  @"INTEGER" //int long integer ...
 //#define SQL_REAL     @"REAL" //浮点
@@ -23,11 +23,12 @@ typedef enum : NSUInteger {
 
 @interface WXJFMDB : NSObject
 
-+ (instancetype)shareInstance;
-//插入数据
-- (BOOL)insertData:(NSDictionary *)dataDict idStr:(NSString *)idStr;
+
+- (instancetype)initWithPath:(NSString *)path tableName:(NSString *)tableName;
+//插入数据 id类型为NSData  NSDictionary两种
+- (BOOL)insertData:(id)dataDict idStr:(NSString *)idStr;
 //更新数据
-- (BOOL)updataData:(NSDictionary *)dataDict idStr:(NSString *)idStr;
+- (BOOL)updataData:(id)dataDict idStr:(NSString *)idStr;
 //查找全部数据
 - (NSMutableArray *)queryAllData;
 //查找某条数据
@@ -37,15 +38,20 @@ typedef enum : NSUInteger {
 //删除全部数据
 - (BOOL)deleteAllData;
 //判断该数据是否存在
-- (BOOL)isExistWithId:(NSString *)idStr;
+- (BOOL)isExistWithId:(NSString *)idStr tableName:(NSString *)tableName;
 //删除表
-- (BOOL)deleteTable;
+- (BOOL)deleteTable:(NSString *)tableName;
 //关闭数据库
 - (BOOL)closeSqlite;
+//计算缓存大小
+- (CGFloat)folderSize;
 //给表添加字段
 - (void)alterTableNewKey:(NSString *)key keyType:(SQLTYPE)type;
 //数据库迁移
-- (void)updateSqlite;
+- (BOOL)creatNewTable:(NSString *)tableName;
+//做数据库迁移该方法必须实现
+- (void)changeTableName:(NSString *)oldName newName:(NSString *)newName;
+
 @end
 
 
